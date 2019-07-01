@@ -5,10 +5,10 @@ import java.nio.file.Files;
 
 public class FileManagerService {
 
-    public static byte [] getFileAsByteArray (String filePath) {
-        byte [] bytes = null;
+    public static byte[] getFileAsByteArray(String filePath) {
+        byte[] bytes = null;
 
-        File file = new File (filePath)  ;
+        File file = new File(filePath);
         try {
             bytes = Files.readAllBytes(file.toPath());
         } catch (IOException e) {
@@ -18,50 +18,46 @@ public class FileManagerService {
         return bytes;
     }
 
-    public static void writesByteArrayToFile (byte [] bytes, String filePath) {
+    public static void writeByteArrayToFile(byte[] bytes, String filePath) {
         try (
-            FileOutputStream fos = new FileOutputStream(filePath))
-
-        {fos.write(bytes);
+                FileOutputStream fos = new FileOutputStream(filePath)) {
+            fos.write(bytes);
             fos.flush();
-        }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        public static void copyFile (String pathFrom, String pathTo) {
-        byte [] bytes = getFileAsByteArray(pathFrom);
-        writesByteArrayToFile(bytes, pathTo);
-        }
-
-        public static String getTextFromFile (String filePath) {
-        String text = "";
-
-            try (
-                FileReader fileReader = new FileReader( filePath);
-                BufferedReader bufferedReader = new BufferedReader(fileReader)
-            )
-            {
-                String line = "";
-                while ((line = bufferedReader.readLine()) != null) {
-                    text += line + "\n";
-                }
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return text;
-        }
-
-        public static void writeTexttoFile (String toPath, String text, boolean append) {
-            try (FileWriter fileWriter = new FileWriter (toPath, append)){
-                fileWriter.write (text);
-                fileWriter.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    public static void copyFile(String pathFrom, String pathTo) {
+        byte[] bytes = getFileAsByteArray(pathFrom);
+        writeByteArrayToFile(bytes, pathTo);
+    }
+
+    public static String getTextFromFile(String filePath) {
+        String text = "";
+
+        try (
+                FileReader fileReader = new FileReader(filePath);
+                BufferedReader bufferedReader = new BufferedReader(fileReader)
+        ) {
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                text += line + "\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return text;
+    }
+
+    public static void writeTexttoFile(String toPath, String text, boolean append) {
+        try (FileWriter fileWriter = new FileWriter(toPath, append)) {
+            fileWriter.write(text);
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 

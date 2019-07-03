@@ -99,7 +99,7 @@ class FileManagerServiceTest {
         assertNotNull(testText);
         assertEquals(testText, text + "\n");
 
-        FileManagerService.writeTexttoFile(txtFiletoPath, text, false);
+        FileManagerService.writeTexttoFile(txtFiletoPath, text, true);
 
         testText = FileManagerService.getTextFromFile(txtFiletoPath);
         assertNotNull(testText);
